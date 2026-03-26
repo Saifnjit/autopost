@@ -1,0 +1,10 @@
+anthropic
+requests
+python-dotenv
+schedule
+flask
+feedparser
+Pillow
+moviepy
+imageio
+imageio-ffmpeg

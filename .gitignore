@@ -1,0 +1,12 @@
+.env
+post_history.json
+bot.log
+post_image.jpg
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store
+*.mp4
+*.webm
+*.mp3
+*.wav
