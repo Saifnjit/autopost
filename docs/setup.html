@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AutoPost — Setup</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0a;
+      --surface: #111111;
+      --border: #222222;
+      --text: #f0f0f0;
+      --muted: #888888;
+      --accent: #0A66C2;
+      --accent-light: #378fe9;
+      --green: #22c55e;
+      --red: #ef4444;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 520px;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+    }
+    .logo span { color: var(--accent-light); }
+
+    .subtitle {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 40px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+    }
+
+    .card-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      letter-spacing: -0.3px;
+    }
+
+    .card-sub {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 28px;
+      line-height: 1.6;
+    }
+
+    .field {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .label-hint {
+      font-weight: 400;
+      color: var(--muted);
+      margin-left: 6px;
+    }
+
+    input[type="text"], input[type="password"], select {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-size: 14px;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s;
+      font-family: "SF Mono", "Fira Code", monospace;
+    }
+
+    input[type="text"]:focus, input[type="password"]:focus, select:focus {
+      border-color: var(--accent);
+    }
+
+    input::placeholder { color: #444; }
+
+    .toggle-vis {
+      position: relative;
+    }
+    .toggle-vis input { padding-right: 44px; }
+    .eye-btn {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 16px;
+      padding: 4px;
+    }
+    .eye-btn:hover { color: var(--text); }
+
+    .help-link {
+      display: inline-block;
+      font-size: 12px;
+      color: var(--accent-light);
+      margin-top: 6px;
+      text-decoration: none;
+    }
+    .help-link:hover { text-decoration: underline; }
+
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 24px 0;
+    }
+
+    .section-title {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .time-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 14px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+      margin-top: 8px;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+    .btn-primary:hover { background: var(--accent-light); }
+    .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .status {
+      margin-top: 16px;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      display: none;
+    }
+    .status.success {
+      background: rgba(34,197,94,0.1);
+      border: 1px solid rgba(34,197,94,0.3);
+      color: var(--green);
+      display: block;
+    }
+    .status.error {
+      background: rgba(239,68,68,0.1);
+      border: 1px solid rgba(239,68,68,0.3);
+      color: var(--red);
+      display: block;
+    }
+
+    .cmd-box {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      font-family: "SF Mono", "Fira Code", monospace;
+      font-size: 13px;
+      color: #86efac;
+      margin-top: 16px;
+      display: none;
+    }
+    .cmd-box.visible { display: block; }
+
+    .footer-note {
+      font-size: 12px;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 20px;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <a href="index.html" style="display:inline-flex;align-items:center;gap:6px;color:var(--muted);font-size:13px;text-decoration:none;margin-bottom:24px;">← Back</a>
+  <div class="logo">Auto<span>Post</span></div>
+  <p class="subtitle">One-time setup — takes about 2 minutes</p>
+
+  <div class="card">
+    <div class="card-title">Connect your accounts</div>
+    <p class="card-sub">Your keys are saved locally to a <code style="color:var(--accent-light)">.env</code> file on your computer. They never leave your machine.</p>
+
+    <!-- LinkedIn Token -->
+    <div class="field">
+      <label>LinkedIn Access Token <span class="label-hint">— required</span></label>
+      <div class="toggle-vis">
+        <input type="password" id="linkedin_token" placeholder="Paste your LinkedIn access token..." />
+        <button class="eye-btn" onclick="toggleVis('linkedin_token', this)">👁</button>
+      </div>
+      <a class="help-link" href="https://www.linkedin.com/developers/apps" target="_blank">Get your LinkedIn token →</a>
+    </div>
+
+    <!-- Anthropic Key -->
+    <div class="field">
+      <label>Anthropic API Key <span class="label-hint">— required</span></label>
+      <div class="toggle-vis">
+        <input type="password" id="anthropic_key" placeholder="sk-ant-..." />
+        <button class="eye-btn" onclick="toggleVis('anthropic_key', this)">👁</button>
+      </div>
+      <a class="help-link" href="https://console.anthropic.com" target="_blank">Get your Anthropic key →</a>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- Niche -->
+    <div class="section-title">Customize your bot</div>
+
+    <div class="field">
+      <label>Your niche</label>
+      <input type="text" id="niche" placeholder="e.g. AI and tech startups, fashion trends, crypto..." value="AI, tech startups, and the future of business" />
+    </div>
+
+    <!-- Posting style -->
+    <div class="field">
+      <label>Posting style</label>
+      <input type="text" id="style" placeholder="e.g. Professional and sharp, casual and trendy..." value="Smart, direct, and a little dry. Like a founder texting a friend." />
+    </div>
+
+    <!-- Post times -->
+    <div class="field">
+      <label>Post times <span class="label-hint">— 24hr format</span></label>
+      <div class="time-grid">
+        <input type="text" id="time1" value="08:00" />
+        <input type="text" id="time2" value="13:00" />
+        <input type="text" id="time3" value="18:00" />
+      </div>
+    </div>
+
+    <button class="btn btn-primary" id="saveBtn" onclick="saveConfig()">Save & Start Bot</button>
+
+    <div class="status" id="status"></div>
+    <div class="cmd-box" id="cmdBox">python main.py</div>
+  </div>
+
+  <p class="footer-note">
+    Keys are stored in <code style="color:var(--accent-light)">.env</code> locally.<br/>
+    Never share your .env file with anyone.
+  </p>
+</div>
+
+<script>
+  function toggleVis(id, btn) {
+    const input = document.getElementById(id);
+    if (input.type === 'password') {
+      input.type = 'text';
+      btn.textContent = '🙈';
+    } else {
+      input.type = 'password';
+      btn.textContent = '👁';
+    }
+  }
+
+  function saveConfig() {
+    const linkedin = document.getElementById('linkedin_token').value.trim();
+    const anthropic = document.getElementById('anthropic_key').value.trim();
+    const niche = document.getElementById('niche').value.trim();
+    const style = document.getElementById('style').value.trim();
+    const t1 = document.getElementById('time1').value.trim();
+    const t2 = document.getElementById('time2').value.trim();
+    const t3 = document.getElementById('time3').value.trim();
+
+    const status = document.getElementById('status');
+    const cmdBox = document.getElementById('cmdBox');
+
+    if (!linkedin || !anthropic) {
+      status.className = 'status error';
+      status.textContent = 'LinkedIn token and Anthropic API key are both required.';
+      cmdBox.classList.remove('visible');
+      return;
+    }
+
+    // Build .env content
+    const envContent = `LINKEDIN_ACCESS_TOKEN=${linkedin}\nANTHROPIC_API_KEY=${anthropic}\n`;
+
+    // Build settings.py content
+    const settingsContent = `# AutoPost Settings — edit anytime\n\nNICHE = "${niche}"\n\nPOSTING_STYLE = "${style}"\n\nSUBREDDITS = [\n    "artificial", "singularity", "ChatGPT", "OpenAI",\n    "MachineLearning", "technology", "startups", "Futurology",\n]\n\nNICHE_KEYWORDS = [\n    "ai", "artificial intelligence", "openai", "chatgpt", "gpt", "llm",\n    "machine learning", "startup", "funding", "raises", "nvidia", "anthropic",\n    "google", "microsoft", "meta", "apple", "automation", "robot", "tech",\n]\n\nRSS_FEEDS = [\n    "https://techcrunch.com/feed/",\n    "https://www.theverge.com/rss/index.xml",\n    "https://feeds.arstechnica.com/arstechnica/index",\n    "https://www.wired.com/feed/rss",\n    "https://feeds.feedburner.com/venturebeat/SZYF",\n]\n\nPOST_TIMES = ["${t1}", "${t2}", "${t3}"]\n\nMIN_VIRAL_SCORE = 7\n`;
+
+    // Download .env file
+    downloadFile('.env', envContent);
+
+    // Download settings.py
+    setTimeout(() => downloadFile('settings.py', settingsContent), 500);
+
+    status.className = 'status success';
+    status.innerHTML = '✓ Two files downloaded: <strong>.env</strong> and <strong>settings.py</strong><br/><br/>Move both files into your autopost folder, then run:';
+    cmdBox.classList.add('visible');
+  }
+
+  function downloadFile(filename, content) {
+    const blob = new Blob([content], { type: 'text/plain' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = filename;
+    a.click();
+  }
+</script>
+
+</body>
+</html>
