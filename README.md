@@ -21,9 +21,11 @@ AutoPost runs in the background and posts to your LinkedIn automatically:
 
 ## Demo
 
-| Post with image | Desktop app |
+![Landing Page](docs/de21dd2a-b196-42bf-b7ad-ef733247ae63.jpg)
+
+| Live LinkedIn Post | Desktop App — Bot Running |
 |---|---|
-| *(add screenshot here)* | *(add screenshot here)* |
+| ![Post](docs/999ad134-4bdd-49bb-9db7-926169be9fbb.jpg) | ![Dashboard](docs/Screenshot%202026-03-27%20225238.png) |
 
 ---
 
