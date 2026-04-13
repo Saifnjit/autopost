@@ -8,3 +8,4 @@ Pillow
 moviepy
 imageio
 imageio-ffmpeg
+beautifulsoup4
