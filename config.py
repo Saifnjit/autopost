@@ -3,8 +3,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-LINKEDIN_ACCESS_TOKEN = os.getenv("LINKEDIN_ACCESS_TOKEN")
-ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY")
+LINKEDIN_ACCESS_TOKEN = (os.getenv("LINKEDIN_ACCESS_TOKEN") or "").strip()
+ANTHROPIC_API_KEY = (os.getenv("ANTHROPIC_API_KEY") or "").strip()
 
 # Load user settings
 from settings import POST_TIMES, POSTING_STYLE, MIN_VIRAL_SCORE  # noqa: E402
